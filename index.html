@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="sv">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#182522">
+  <meta name="description" content="Marcus Öhman utför KNX-arbeten med utgångspunkt i Jönköping. Hör av dig om installation, programmering eller hjälp med din KNX-anläggning.">
+  <title>Marcus Öhman | KNX i Jönköping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182522;
+      --paper: #f6f5ef;
+      --lime: #d4ef72;
+      --coral: #f17c60;
+      --muted: #65716b;
+      --line: #d9ddd4;
+      --display: "Space Grotesk", "DM Sans", sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .site-header {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: 26px 7.2%;
+      color: #fff;
+      border-bottom: 1px solid rgb(255 255 255 / 20%);
+    }
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font: 600 17px var(--display);
+      text-decoration: none;
+    }
+    .mark {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      color: var(--ink);
+      background: var(--lime);
+      font: 700 15px var(--display);
+    }
+    .header-link {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      padding: 0 16px;
+      border: 1px solid rgb(255 255 255 / 60%);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 180ms ease, background 180ms ease;
+    }
+    .header-link:hover { color: var(--ink); background: #fff; }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: min(780px, 100svh);
+      align-items: center;
+      overflow: hidden;
+      color: #fff;
+      background-color: #34423c;
+      background-image: linear-gradient(90deg, rgb(15 25 23 / 82%) 0%, rgb(15 25 23 / 62%) 42%, rgb(15 25 23 / 16%) 100%), url("https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=2200&q=85");
+      background-position: center, 58% center;
+      background-size: cover;
+    }
+    .hero::after {
+      position: absolute;
+      right: 7.2%;
+      bottom: 11%;
+      width: 1px;
+      height: 104px;
+      background: rgb(255 255 255 / 65%);
+      content: "";
+    }
+    .hero-content {
+      width: min(680px, 85%);
+      margin: 68px 0 36px 12.5%;
+      animation: arrive 700ms both;
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin: 0 0 23px;
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 27px; height: 2px; background: var(--coral); content: ""; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 690px;
+      margin-bottom: 22px;
+      font: 600 clamp(52px, 7vw, 92px)/.99 var(--display);
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      max-width: 475px;
+      margin-bottom: 31px;
+      color: rgb(255 255 255 / 83%);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+    .button {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      gap: 23px;
+      padding: 0 20px;
+      color: var(--ink);
+      background: var(--lime);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 180ms ease, transform 180ms ease;
+    }
+    .button:hover { background: #e2f79a; transform: translateY(-2px); }
+    .button span { font-size: 19px; line-height: 1; }
+    .hero-note {
+      position: absolute;
+      right: 7.2%;
+      bottom: 8%;
+      color: rgb(255 255 255 / 82%);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+    }
+
+    .intro-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 0 12.5%;
+      color: var(--paper);
+      background: var(--ink);
+    }
+    .intro-item {
+      display: flex;
+      min-height: 94px;
+      align-items: center;
+      gap: 13px;
+      padding: 18px 22px;
+      border-right: 1px solid rgb(255 255 255 / 15%);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .intro-item:first-child { border-left: 1px solid rgb(255 255 255 / 15%); }
+    .intro-number { color: var(--lime); font: 600 18px var(--display); }
+
+    .section { padding: 116px 12.5%; }
+    .section-kicker {
+      margin-bottom: 18px;
+      color: #697b55;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .section-heading {
+      max-width: 660px;
+      margin-bottom: 20px;
+      font: 600 clamp(36px, 4.5vw, 58px)/1.06 var(--display);
+      letter-spacing: 0;
+    }
+    .section-lead { max-width: 600px; color: var(--muted); font-size: 16px; line-height: 1.8; }
+    .services { padding-bottom: 120px; }
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 59px;
+      border-top: 1px solid var(--line);
+    }
+    .service {
+      min-height: 230px;
+      padding: 26px 30px 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .service + .service { padding-left: 30px; border-left: 1px solid var(--line); }
+    .service-index { margin-bottom: 35px; color: #778570; font: 500 13px var(--display); }
+    .service h3 { margin-bottom: 10px; font: 600 21px var(--display); }
+    .service p { max-width: 280px; margin-bottom: 0; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    .about {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 12%;
+      align-items: start;
+      background: #eaece2;
+    }
+    .about .section-heading { max-width: 430px; }
+    .about-copy { padding-top: 34px; }
+    .about-copy p { color: #4f5e57; font-size: 16px; line-height: 1.85; }
+    .about-note {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 27px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .about-note::before { width: 27px; height: 2px; background: var(--coral); content: ""; }
+
+    .contact {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 40px;
+      padding-top: 90px;
+      padding-bottom: 90px;
+      color: #fff;
+      background: var(--ink);
+    }
+    .contact .section-kicker { color: var(--lime); }
+    .contact .section-heading { max-width: 570px; margin-bottom: 0; }
+    .contact .button { flex: 0 0 auto; }
+    .site-footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 7.2%;
+      color: #bfc8c0;
+      background: var(--ink);
+      border-top: 1px solid rgb(255 255 255 / 15%);
+      font-size: 12px;
+    }
+    .site-footer a { text-underline-offset: 3px; }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 760px) {
+      .site-header { padding: 17px 6%; }
+      .wordmark { gap: 8px; font-size: 15px; }
+      .mark { width: 29px; height: 29px; }
+      .header-link { min-height: 38px; padding: 0 12px; font-size: 12px; }
+      .hero {
+        min-height: min(760px, 100svh);
+        background-image: linear-gradient(90deg, rgb(15 25 23 / 80%), rgb(15 25 23 / 45%)), url("https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80");
+        background-position: center, 61% center;
+      }
+      .hero-content { width: 88%; margin: 56px 6% 35px; }
+      .eyebrow { font-size: 10px; }
+      h1 { max-width: 520px; font-size: clamp(48px, 12vw, 70px); }
+      .hero-copy { max-width: 420px; font-size: 15px; }
+      .hero::after, .hero-note { display: none; }
+      .intro-strip { grid-template-columns: 1fr; padding: 0 6%; }
+      .intro-item, .intro-item:first-child { min-height: 64px; padding: 12px 4px; border: 0; border-bottom: 1px solid rgb(255 255 255 / 15%); }
+      .intro-item:last-child { border-bottom: 0; }
+      .section { padding: 78px 7%; }
+      .section-heading { font-size: clamp(36px, 10vw, 49px); }
+      .service-grid { grid-template-columns: 1fr; margin-top: 37px; }
+      .service { min-height: auto; padding: 22px 0 25px; }
+      .service + .service { padding-left: 0; border-left: 0; }
+      .service-index { margin-bottom: 20px; }
+      .about { grid-template-columns: 1fr; gap: 0; }
+      .about-copy { padding-top: 5px; }
+      .contact { align-items: start; flex-direction: column; gap: 28px; }
+      .site-footer { padding: 19px 7%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Marcus Öhman, till sidans början"><span class="mark" aria-hidden="true">M</span> Marcus Öhman</a>
+    <a class="header-link" href="#kontakt">Kontakta mig</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">KNX-arbeten · Jönköping</p>
+        <h1 id="hero-title">Smarta hem börjar med bra KNX.</h1>
+        <p class="hero-copy">Jag heter Marcus och hjälper dig med KNX-arbeten i Jönköping med omnejd. Från nya lösningar till ändringar i en befintlig anläggning.</p>
+        <a class="button" href="#kontakt">Berätta om ditt projekt <span aria-hidden="true">→</span></a>
+      </div>
+      <span class="hero-note" aria-hidden="true">Ljus · Värme · Styrning</span>
+    </section>
+
+    <div class="intro-strip" aria-label="Verksamhetsområde och inriktning">
+      <div class="intro-item"><span class="intro-number">01</span> KNX-installation och programmering</div>
+      <div class="intro-item"><span class="intro-number">02</span> Ändringar och utbyggnad</div>
+      <div class="intro-item"><span class="intro-number">03</span> Jönköping med omnejd</div>
+    </div>
+
+    <section class="section services" aria-labelledby="services-title">
+      <p class="section-kicker">Vad jag kan hjälpa till med</p>
+      <h2 class="section-heading" id="services-title">KNX som fungerar för dig.</h2>
+      <p class="section-lead">Varje projekt ser olika ut. Vi börjar med att gå igenom vad du vill få ut av din anläggning och hittar en lösning som passar.</p>
+      <div class="service-grid">
+        <article class="service">
+          <p class="service-index">01 / Nytt projekt</p>
+          <h3>Installation</h3>
+          <p>Planering och KNX-arbeten för dig som bygger nytt eller vill lägga till smart styrning.</p>
+        </article>
+        <article class="service">
+          <p class="service-index">02 / Befintlig anläggning</p>
+          <h3>Programmering</h3>
+          <p>Anpassa funktioner för exempelvis belysning, värme och andra delar av din KNX-anläggning.</p>
+        </article>
+        <article class="service">
+          <p class="service-index">03 / Nästa steg</p>
+          <h3>Ändringar och utbyggnad</h3>
+          <p>Få hjälp när behoven förändras eller när du vill bygga vidare på en befintlig lösning.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section about" aria-labelledby="about-title">
+      <div>
+        <p class="section-kicker">Om mig</p>
+        <h2 class="section-heading" id="about-title">Marcus Öhman. KNX i Jönköping.</h2>
+      </div>
+      <div class="about-copy">
+        <p>Jag utför KNX-arbeten med utgångspunkt i Jönköping. Oavsett om du vill komma igång med KNX, justera en befintlig installation eller diskutera ett kommande projekt börjar vi med dina behov.</p>
+        <p>Hör av dig och berätta lite om vad du tänkt dig, så tar vi det därifrån.</p>
+        <div class="about-note">Verksam i Jönköping med omnejd</div>
+      </div>
+    </section>
+
+    <section class="section contact" id="kontakt" aria-labelledby="contact-title">
+      <div>
+        <p class="section-kicker">Har du ett projekt på gång?</p>
+        <h2 class="section-heading" id="contact-title">Låt oss prata KNX.</h2>
+      </div>
+      <a class="button" href="https://github.com/ohman92" target="_blank" rel="noopener noreferrer">Hitta mig på GitHub <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>© <span id="year">2026</span> Marcus Öhman</span>
+    <a href="#top">Till sidans början ↑</a>
+  </footer>
+</body>
+</html>
